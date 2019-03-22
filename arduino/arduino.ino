@@ -80,7 +80,6 @@ void loop() {
   }
   delay(100);
 }
-
 void setupColor(int red, int green, int blue) {
   analogWrite(RED, red);
   analogWrite(GREEN, green);
