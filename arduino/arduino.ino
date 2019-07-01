@@ -103,7 +103,7 @@ void sendSMS3() {
   delay(150);
   // REPLACE THE X's WITH THE RECIPIENT'S MOBILE NUMBER
   // USE INTERNATIONAL FORMAT CODE FOR MOBILE NUMBERS
-  SIM900.println("AT + CMGS = \"+639358550959\"");
+  SIM900.println("AT + CMGS = \"+639000000000\""); //replace it to ur own number +63
   delay(150);
   
   SIM900.println("GAS LEAKED DETECTED!");
