@@ -1,41 +1,46 @@
 /*
-  source code: bitbucket.com/blckclov3r
-          Components:
-          1x rgb led
-          gsm sim900a
-          arduino uno
-          gas sensor MQ-6 
-          relay, 1 or more channel
-          circuit breaker
+   bitbucket.com/blckclov3r
+   github.com/blckclov3r
+   facebook.com/blckclov3r
+   blckclov3r@gmail.com
 */
 #include <SoftwareSerial.h>
+
 SoftwareSerial SIM900(7, 8);
+
 #define RED 3
 #define GREEN 5
 #define BLUE 6
 #define RELAY1 11
 #define RELAY2 13
+
 boolean gas_state = false;
 int sensorValue = 0;
+
 void setup() {
+  
   pinMode(RELAY1, OUTPUT);
   pinMode(RELAY2, OUTPUT);
   digitalWrite(RELAY1, HIGH);
   digitalWrite(RELAY2, HIGH);
+  
   // Arduino communicates with SIM900 GSM shield at a baud rate of 19200
   // Make sure that corresponds to the baud rate of your module
   pinMode(RED, OUTPUT);
   pinMode(GREEN, OUTPUT);
   pinMode(BLUE, OUTPUT);
+  
   setupColor(255, 255, 255);
   Serial.begin(19200);
   SIM900.begin(19200);
+  
   // Give time to your GSM shield log on to network
   //10,000ms == 10 seconds
   delay(10000);
   Serial.println("\t+-----------------+");
   Serial.println("\t        OK         ");
   Serial.println("\t+-----------------+\n");
+  
 }
 
 void loop() {
@@ -95,20 +100,18 @@ void sendSMS3() {
   }
   // AT command to set SIM900 to SMS mode
   SIM900.print("AT+CMGF=1\r");
-  delay(100);
+  delay(150);
   // REPLACE THE X's WITH THE RECIPIENT'S MOBILE NUMBER
   // USE INTERNATIONAL FORMAT CODE FOR MOBILE NUMBERS
   SIM900.println("AT + CMGS = \"+639358550959\"");
-  delay(100);
-  //  SIM900.println("AT + CMGS = \"+639229246777\"");
-  //  delay(100);
-  // REPLACE WITH YOUR OWN SMS MESSAGE CONTENT
+  delay(150);
+  
   SIM900.println("GAS LEAKED DETECTED!");
-  delay(100);
-  // End AT command with a ^Z, ASCII code 26
+  delay(150);
+  
   SIM900.println((char)26);
-  delay(100);
+  delay(150);
   SIM900.println();
-  // Give module time to send SMS
-  delay(4444);
+
+  delay(4400);
 }
